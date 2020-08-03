@@ -1,0 +1,45 @@
+html {
+  background-color: $white;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $white;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: inherit;
+}
+
+main {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+.visually-hidden {
+  position: absolute;
+
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  white-space: nowrap;
+
+  border: 0;
+  clip-path: inset(100%);
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 374px;
+}

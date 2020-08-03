@@ -1,0 +1,35 @@
+@mixin _font($font-family, $font-size, $font-weight, $line-height, $letter-spacing) {
+  font-family: $font-family, Arial, sans-serif;
+  font-size: $font-size;
+  font-weight: $font-weight;
+
+  @if $letter-spacing {
+    letter-spacing: $letter-spacing / $font-size + em;
+  }
+
+  @if $line-height {
+    line-height: $line-height / $font-size + em;
+  } @else {
+    line-height: 1.15em;
+  }
+}
+
+@mixin fontRoboto400($font-size, $line-height: false, $letter-spacing: false) {
+  @include _font("Roboto", $font-size, 400, $line-height, $letter-spacing);
+}
+
+@mixin fontRoboto500($font-size, $line-height: false, $letter-spacing: false) {
+  @include _font("Roboto", $font-size, 500, $line-height, $letter-spacing);
+}
+
+@mixin fontSFCompact400($font-size, $line-height: false, $letter-spacing: false) {
+  @include _font("SFCompactDisplay", $font-size, 400, $line-height, $letter-spacing);
+}
+
+@mixin fontSFCompact500($font-size, $line-height: false, $letter-spacing: false) {
+  @include _font("SFCompactDisplay", $font-size, 500, $line-height, $letter-spacing);
+}
+
+@mixin fontSFCompact600($font-size, $line-height: false, $letter-spacing: false) {
+  @include _font("SFCompactDisplay", $font-size, 600, $line-height, $letter-spacing);
+}

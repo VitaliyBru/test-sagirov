@@ -1,5 +1,7 @@
 const path = require("path");
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const mockData = require('./src/data/mock.json');
 
 const isProd = process.env.NODE_ENV === `production`;
 
@@ -17,7 +19,13 @@ module.exports = {
     contentBase: path.join(__dirname, `build`),
     compress: false,
     open: false,
-    port: 1337
+    host: 'localhost',
+    port: 1337,
+    before: function (app) {
+      app.post('/data/mock.json', function (req, res) {
+        res.send(mockData);
+      });
+    }
   },
 
   module: {
@@ -52,14 +60,25 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|[ot]tf)$/i,
+        exclude: /node_modules/,
         use: [
           {
             loader: `file-loader`,
             options: {
-              name: `[path][name].[ext]`,
-            },
+              name: `fonts/[name].[ext]`,
+              publicPath: `../`
+            }
           }
         ]
+      },
+      {
+        test: /\.json$/i,
+        exclude: /node_modules/,
+        type: 'javascript/auto',
+        loader: 'file-loader',
+        options: {
+          name: 'data/[name].json'
+        }
       }
     ],
   },
@@ -68,7 +87,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: `css/style.css`
     }),
+
+    new webpack.ProvidePlugin({
+      Promise: 'es6-promise-promise'
+    }),
   ],
 
-  devtool: 'source-map'
+  devtool: isProd ? false : 'source-map'
 };
