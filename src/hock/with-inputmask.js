@@ -16,7 +16,7 @@ const withInputmask = (ReactElement) => {
     }
 
     componentDidMount() {
-      Inputmask({"mask": "+7 999 999 99 99"}).mask(this.phoneRef.current);
+      Inputmask({mask: "+7 999 999 99 99", showMaskOnHover: false}).mask(this.phoneRef.current);
     }
   }
 
